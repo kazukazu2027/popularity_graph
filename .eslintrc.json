@@ -4,17 +4,9 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "next",
-    "next/core-web-vitals"
+    "prettier"
   ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "react-redux",
-    "better-styled-components",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
@@ -39,8 +31,6 @@
         "varsIgnorePattern": "^_.*"
       }
     ],
-    "react-redux/no-unused-prop-types": "warn",
-    "react-redux/useSelector-prefer-selectors": "off",
     "react/display-name": "off",
     "react-hooks/rules-of-hooks": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off"
