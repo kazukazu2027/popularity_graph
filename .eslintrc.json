@@ -1,3 +1,48 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "next",
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "react-redux",
+    "better-styled-components",
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/no-non-null-assertion": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_.*"
+      }
+    ],
+    "react-redux/no-unused-prop-types": "warn",
+    "react-redux/useSelector-prefer-selectors": "off",
+    "react/display-name": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  }
 }
