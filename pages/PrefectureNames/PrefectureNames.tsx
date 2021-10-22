@@ -16,7 +16,7 @@ const PrefectureNames = () => {
   useEffect(() => {
     const key = {
       headers: {
-        'X-API-KEY': 'tujaQDp5XYgUZCycSWPG8AVeEfqQo8ysLxrC0yA7',
+        'X-API-KEY': process.env.NEXT_PUBLIC_API_KEY,
       },
     };
     axios
