@@ -1,0 +1,8 @@
+.prefectureNamesContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.prefectureNameContainer {
+  margin-right: 5px;
+}
