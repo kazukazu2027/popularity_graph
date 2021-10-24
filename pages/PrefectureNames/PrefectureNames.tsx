@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './PrefectureNames.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPopularityDataAction } from 'redux/Action/Action';
+import { toggleItem } from 'pages/function/toggleItem';
+import { RootState } from 'redux/Store/Store';
 
 type PrefectureNameArray = {
   prefCode: number;
@@ -9,8 +13,34 @@ type PrefectureNameArray = {
 
 const PrefectureNames = () => {
   const [prefectureNames, setPrefectureNames] = useState<PrefectureNameArray[]>([]);
+  const dispatch = useDispatch();
+  const popularityData = useSelector((state: RootState) => state.popularityData);
   const handleCheck = (event: any) => {
-    console.log(event.target.value);
+    const key = {
+      headers: {
+        'X-API-KEY': process.env.NEXT_PUBLIC_API_KEY,
+      },
+      params: {
+        prefCode: String(event.target.value),
+        cityCode: '-',
+      },
+    };
+    axios
+      .get('https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear', key)
+      .then((response: any) => {
+        const data = response.data.result.data[0].data.map((data) => {
+          return data.value;
+        });
+        const name = prefectureNames.filter(
+          (prefectureName) => prefectureName.prefCode === Number(event.target.value),
+        )[0].prefName;
+        const newPopularityData = toggleItem(popularityData, { name: name, data: data });
+        dispatch(getPopularityDataAction(newPopularityData));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('データの取得に失敗しました');
+      });
   };
 
   useEffect(() => {
@@ -26,12 +56,13 @@ const PrefectureNames = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert('データの取得に失敗しました');
       });
   }, []);
 
   return (
     <div>
-      <p>都道府県</p>
+      <h2 className={styles.text}>都道府県</h2>
       <div className={styles.prefectureNamesContainer}>
         {prefectureNames.map((prefectureName) => {
           return (
@@ -41,8 +72,9 @@ const PrefectureNames = () => {
                 id={prefectureName.prefName}
                 value={prefectureName.prefCode}
                 onChange={handleCheck}
+                className={styles.checkbox}
               />
-              <label htmlFor={prefectureName.prefName}>
+              <label htmlFor={prefectureName.prefName} className={styles.label}>
                 <span>{prefectureName.prefName}</span>
               </label>
             </div>
