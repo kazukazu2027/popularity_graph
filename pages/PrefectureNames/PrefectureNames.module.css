@@ -1,0 +1,21 @@
+.text {
+  font-size: 20px;
+}
+
+.prefectureNamesContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.prefectureNameContainer {
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+.label {
+  cursor: pointer;
+}
