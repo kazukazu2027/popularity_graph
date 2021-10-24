@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './PrefectureNames.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPopularityDataAction } from 'redux/Action/Action';
-import { toggleItem } from 'pages/function/toggleItem';
+import { getPopularityDataAction, PopularityData } from 'redux/Action/Action';
 import { RootState } from 'redux/Store/Store';
 
 type PrefectureNameArray = {
   prefCode: number;
   prefName: string;
+};
+
+const toggleItem = (popularityDatas: PopularityData[], popularityData: PopularityData) => {
+  return popularityDatas.some((data) => data.name === popularityData.name)
+    ? popularityDatas.filter((data) => data.name !== popularityData.name)
+    : [...popularityDatas, popularityData];
 };
 
 const PrefectureNames = () => {
