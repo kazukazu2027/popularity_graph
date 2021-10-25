@@ -3,24 +3,24 @@ import axios from 'axios';
 import styles from './PrefectureNames.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPopularityDataAction, PopularityData } from 'redux/Action/Action';
-import { RootState } from 'redux/Store/Store';
+import { RootState } from 'pages/_app';
 
 type PrefectureNameArray = {
   prefCode: number;
   prefName: string;
 };
 
-const toggleItem = (popularityDatas: PopularityData[], popularityData: PopularityData) => {
-  return popularityDatas.some((data) => data.name === popularityData.name)
-    ? popularityDatas.filter((data) => data.name !== popularityData.name)
-    : [...popularityDatas, popularityData];
+const toggleItem = (popularityDataArray: PopularityData[], popularityData: PopularityData) => {
+  return popularityDataArray.some((data) => data.name === popularityData.name)
+    ? popularityDataArray.filter((data) => data.name !== popularityData.name)
+    : [...popularityDataArray, popularityData];
 };
 
 const PrefectureNames = () => {
-  const [prefectureNames, setPrefectureNames] = useState<PrefectureNameArray[]>([]);
   const dispatch = useDispatch();
-  const popularityData = useSelector((state: RootState) => state.popularityData);
-  const handleCheck = (event: any) => {
+  const [prefectureNames, setPrefectureNames] = useState<PrefectureNameArray[]>([]);
+  const popularityData = useSelector((state: RootState) => state.data.popularityData);
+  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const key = {
       headers: {
         'X-API-KEY': process.env.NEXT_PUBLIC_API_KEY,
