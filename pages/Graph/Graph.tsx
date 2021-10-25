@@ -3,11 +3,14 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useSelector } from 'react-redux';
 import styles from './Graph.module.css';
-import { RootState } from 'redux/Store/Store';
+import { RootState } from 'pages/_app';
 
 const Graph = () => {
-  const popularityData = useSelector((state: RootState) => state.popularityData);
+  const popularityData = useSelector((state: RootState) => state.data.popularityData);
   const options = {
+    title: {
+      text: '都道府県別の総人口グラフ',
+    },
     yAxis: {
       title: {
         text: '人口数',
