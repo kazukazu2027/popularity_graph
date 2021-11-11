@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useSelector } from 'react-redux';
 import styles from './Graph.module.css';
-import { RootState } from 'pages/_app';
+import { RootState } from 'redux/Store/configureStore';
 
 const Graph = () => {
   const popularityData = useSelector((state: RootState) => state.data.popularityData);
